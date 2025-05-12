@@ -18,12 +18,28 @@ pipeline {
         }
       }
     }
-    stage('Test') {
+    stage('Static Analysis') {
       parallel {
         stage('Unit Tests') {
           steps {
             container('maven') {
               sh 'mvn test'
+            }
+          }
+        }
+
+        stage('SCA') {
+          steps{
+            container('maven'){
+              catchError(buildResult:'SUCCESS',stageResult:'FAILURE') {
+                sh 'mvn org.owasp:dependency-check-maven:check'
+              }
+            }
+          }
+          posts{
+            always {
+              archiveArtifacts allowEmptyArchive: true, artifacts: 'target/dependency-check-report.html', fingerprint:true, onlyIfSuccessful: true
+              //dependencyCheckPublisher pattern: 'report.xml'
             }
           }
         }
@@ -43,7 +59,6 @@ pipeline {
           steps{
             container('kaniko') {
               sh '''
-                echo "############## here 1 $(cat /kaniko/.docker/config.json)" 
                 /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.io/essuthiessoh/dso-demo
               '''
             }
