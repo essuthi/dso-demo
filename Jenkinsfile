@@ -46,7 +46,7 @@ pipeline {
         stage('OSS License Checker') {
           steps{
             container('licensefinder') {
-              sh 'ls-al'
+              sh 'ls -al'
               sh '''
                 #!/bin/bash--login
                 /bin/bash--login
