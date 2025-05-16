@@ -1,0 +1,84 @@
+{
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Java Source Analyzer",
+          "version": "1.0.0-scan",
+          "fullName": "Java Source Analyzer"
+        }
+      },
+      "conversion": {
+        "tool": {
+          "driver": {
+            "name": "@ShiftLeft/sast-scan"
+          }
+        },
+        "invocation": {
+          "arguments": [
+            "pmd",
+            "--no-cache",
+            "--fail-on-violation",
+            "false",
+            "-language",
+            "java",
+            "-d",
+            "/app",
+            "-r",
+            "/app/reports/source-java-report.csv",
+            "-f",
+            "csv",
+            "-R",
+            "/usr/local/src/lib/../rules-pmd.xml"
+          ],
+          "executionSuccessful": true,
+          "commandLine": "pmd --no-cache --fail-on-violation false -language java -d /app -r /app/reports/source-java-report.csv -f csv -R /usr/local/src/lib/../rules-pmd.xml",
+          "endTimeUtc": "2025-05-16T12:53:18Z",
+          "workingDirectory": {
+            "uri": "file:///home/nzhinusoft/Documents/Learning/DevSecOps/dso-demo"
+          }
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "endTimeUtc": "2025-05-16T12:53:18Z",
+          "workingDirectory": {
+            "uri": "file:///home/nzhinusoft/Documents/Learning/DevSecOps/dso-demo"
+          }
+        }
+      ],
+      "properties": {
+        "metrics": {
+          "total": 0,
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
+      },
+      "results": [],
+      "automationDetails": {
+        "description": {
+          "text": "Static Analysis Security Test results using @ShiftLeft/sast-scan"
+        },
+        "guid": "49c637cb-5292-482d-a5ca-4f7b6c7e9f82"
+      },
+      "versionControlProvenance": [
+        {
+          "branch": "main",
+          "repositoryUri": "https://github.com/essuthi/dso-demo",
+          "revisionId": "75b2d1eb41ee7353c7799adba643f4fa0a3f4306"
+        }
+      ]
+    }
+  ],
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "inlineExternalProperties": [
+    {
+      "guid": "49c637cb-5292-482d-a5ca-4f7b6c7e9f82",
+      "runGuid": "1863c36d-7cb6-4130-9d2b-7008b6cdfa13"
+    }
+  ]
+}
